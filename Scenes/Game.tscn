@@ -1,0 +1,95 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Scenes/Donut.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Game.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Cloud Click.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/bg.png" type="Texture" id=5]
+[ext_resource path="res://Assets/battle_theme.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Assets/spawn.png" type="Texture" id=7]
+[ext_resource path="res://Assets/BitPap.ttf" type="DynamicFontData" id=8]
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 8 )
+
+[node name="Game" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Donut" parent="." instance=ExtResource( 1 )]
+position = Vector2( 86.2173, 141.312 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 58.0798, 97.7065 )
+
+[node name="Sprite" type="Sprite" parent="."]
+show_behind_parent = true
+position = Vector2( 90, 159.603 )
+texture = ExtResource( 5 )
+
+[node name="Spawner0" type="Node2D" parent="."]
+position = Vector2( 37.5675, 120.606 )
+
+[node name="Sprite" type="Sprite" parent="Spawner0"]
+visible = false
+texture = ExtResource( 7 )
+
+[node name="Spawner1" type="Node2D" parent="."]
+position = Vector2( 89.2056, 99.1564 )
+
+[node name="Sprite" type="Sprite" parent="Spawner1"]
+visible = false
+texture = ExtResource( 7 )
+
+[node name="Spawner2" type="Node2D" parent="."]
+position = Vector2( 134.885, 124.578 )
+
+[node name="Sprite" type="Sprite" parent="Spawner2"]
+visible = false
+texture = ExtResource( 7 )
+
+[node name="Spawner3" type="Node2D" parent="."]
+position = Vector2( 90.3972, 151.589 )
+
+[node name="Sprite" type="Sprite" parent="Spawner3"]
+visible = false
+texture = ExtResource( 7 )
+
+[node name="LevelLabel" type="Label" parent="."]
+margin_left = 129.889
+margin_top = 2.03908
+margin_right = 169.889
+margin_bottom = 18.0391
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.843137, 0.0901961, 0.878431, 1 )
+text = "level:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScoreLabel" type="Label" parent="."]
+margin_left = 3.26252
+margin_top = 2.6508
+margin_right = 44.2625
+margin_bottom = 18.6508
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.945098, 0.0392157, 0.929412, 1 )
+text = "score: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShotTimer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="DeathPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
+[connection signal="dead" from="Player" to="." method="_on_Player_dead"]
+[connection signal="timeout" from="ShotTimer" to="." method="_on_ShotTimer_timeout"]
