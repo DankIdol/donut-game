@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/gun.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4.01586, 3.98654 )
+extents = Vector2( 4.51653, 4.35124 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "move"
@@ -81,4 +81,3 @@ anims/shoot = SubResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource( 1 )
 [connection signal="area_entered" from="Hitbox" to="." method="_on_HitBox_area_entered"]
-[connection signal="body_entered" from="Hitbox" to="." method="_on_HitBox_body_entered"]

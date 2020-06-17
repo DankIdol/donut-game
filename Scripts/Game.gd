@@ -5,6 +5,7 @@ var enemies = []
 var enemy = preload("res://Scenes/Enemy.tscn")
 var score = 0
 var level = 1
+var inp = InputEventKey.new()
 
 func _ready():
 	randomize()
@@ -69,3 +70,22 @@ func _on_ShotTimer_timeout():
 
 func _on_Player_dead():
 	get_tree().change_scene("res://Scenes/Menu.tscn")
+
+
+func _on_Nav_direction(which):
+	print("got " + which)
+	if which == "up":
+		inp.scancode = KEY_UP
+	if which == "right":
+		inp.scancode = KEY_RIGHT
+	if which == "down":
+		inp.scancode = KEY_DOWN
+	if which == "left":
+		inp.scancode = KEY_LEFT
+		
+	inp.pressed = true
+	Input.parse_input_event(inp)
+
+func _on_Nav_button_up():
+	inp.pressed = false
+	Input.parse_input_event(inp)
